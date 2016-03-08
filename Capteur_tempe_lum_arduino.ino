@@ -1,11 +1,16 @@
-#include <SoftwareSerial.h>
+#include <XBee.h>
+// shield Arduino
 #define RXPIN 0
 #define TXPIN 1
 #define BAUDRATE 9600
 
-SoftwareSerial XBeeSerial =  SoftwareSerial(RXPIN, TXPIN);
+// library :  https://www.arduino.cc/en/Reference/SoftwareSerial
+SoftwareSerial xbee =  SoftwareSerial(RXPIN, TXPIN);
+// luminosity
 int photocellPin = 7; // the cell and 10K pulldown are connected to a0
 int photocellReading; // the analog reading from the analog resistor divider
+// temperature
+int chaleurIntPin = 10;
 
  
 void setup()
@@ -16,44 +21,24 @@ void setup()
     Serial.println("[INFOS] Arduino 1 ok.");
  
     // Envois un message aux modules xbee
-    XBeeSerial.begin(BAUDRATE);
-    XBeeSerial.println("[INFOS] Arduino 1 ok.");
+    xbee.begin(BAUDRATE);
+    xbee.println("[INFOS] Arduino 1 ok.");
 }
  
 void loop()
 {
-
-    int chaleurIntPin = 10;
-    char c[256];
-    char dfcon;
-    
-    int inTmp36 = analogRead(chaleurIntPin);
-    //Serial.println(inTmp36);
-    //float voltage = inTmp36 * 0.5;
-    //voltage /= 1024.0;
-    
-    //Serial.println(voltage);
- 
-    // 5/1023
-    float temperatureC = ((inTmp36*0.004882) - 0.50) * 100 ;
-    
-    Serial.print(temperatureC);
-    //dfcon = Serial.print(temperatureC);
-    
-    
-    
-    // Affiche les informations qu'il reçois
-    if (XBeeSerial.available()) {
-        Serial.println(XBeeSerial.read());
-    }
- 
-    //if (Serial.available() > 0) {
-     // XBeeSerial.print(dfcon);
-    //}
- 
-    delay(2000);
-
-
+  // read tmp36 value
+  int inTmp36 = analogRead(chaleurIntPin);
+  //Serial.println(inTmp36);
+  //float voltage = inTmp36 * 0.5;
+  //voltage /= 1024.0;
+  
+  //Serial.println(voltage);
+  
+  // 5/1023 calcul pour °C
+  float temperatureC = ((inTmp36*0.004882) - 0.50) * 100 ;
+  
+  Serial.print(temperatureC);
 
   photocellReading = analogRead(photocellPin);
   Serial.print("   Analog reading = ");
@@ -70,7 +55,10 @@ void loop()
   } else {
     Serial.println(" - Tres lumineux");
   }
-  delay(5000);
+  delay(2000);
+
+  xbee.readPacket();
+
 
 }
 
