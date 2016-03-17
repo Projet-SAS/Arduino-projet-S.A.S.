@@ -8,27 +8,31 @@
 // Xbee PIN
   #define RXPIN 0
   #define TXPIN 1
+// Xbee Init
+  SoftwareSerial XBeeSerial =  SoftwareSerial(RXPIN, TXPIN);
 
 // fréquence
   #define BAUDRATE 9600
 
 // Data wire is plugged into port 2 on the Arduino
-#define ONE_WIRE_BUS 2
-
+  #define ONE_WIRE_BUS 2
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-OneWire oneWire(ONE_WIRE_BUS);
-SoftwareSerial XBeeSerial =  SoftwareSerial(RXPIN, TXPIN);
-
+  OneWire oneWire(ONE_WIRE_BUS);
 // Pass our oneWire reference to Dallas Temperature. 
-DallasTemperature sensors(&oneWire);
-int ledPin = 13;                // choose the pin for the LED
-int inputPin = 15;               // choose the input pin (for PIR sensor)
-int pirState = LOW;             // we start, assuming no motion detected
-int val = 0;                    // variable for reading the pin status
-int photocellPin = 7; // the cell and 10K pulldown are connected to a0
-int photocellReading; // the analog reading from the analog resistor divider
+  DallasTemperature sensors(&oneWire);
+
+
+// Détecteur de présence
+  int ledPin = 13;                // Pin de la LED
+  int inputPin = 15;               // Pin d'entrée du PIR
+  int pirState = LOW;             // we start, assuming no motion detected
+  int val = 0;                    // variable for reading the pin status
+
+// Photorésistance
+  int photocellPin = 7; // the cell and 10K pulldown are connected to a0
+  int photocellReading; // the analog reading from the analog resistor divider
 //the time we give the sensor to calibrate (10-60 secs according to the datasheet)
-int calibrationTime = 10;
+  int calibrationTime = 10;
 
 /*
  * The setup function.
