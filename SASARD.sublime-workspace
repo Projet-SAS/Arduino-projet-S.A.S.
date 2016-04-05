@@ -1,0 +1,526 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"de",
+				"defs	Method"
+			],
+			[
+				"read",
+				"readline"
+			],
+			[
+				"def",
+				"defs	Method"
+			],
+			[
+				"ar",
+				"arduinoData"
+			],
+			[
+				"a",
+				"arduinoData"
+			],
+			[
+				"if",
+				"if	If Condition"
+			],
+			[
+				"tr",
+				"try	Try/Except"
+			],
+			[
+				"i",
+				"italic"
+			],
+			[
+				"font",
+				"font-style"
+			],
+			[
+				"pad",
+				"padding-bottom"
+			],
+			[
+				"try",
+				"try	Try/Except"
+			],
+			[
+				"lo",
+				"logData"
+			],
+			[
+				"sel",
+				"self"
+			],
+			[
+				"pr",
+				"processData"
+			],
+			[
+				"d",
+				"def	Function"
+			],
+			[
+				"tex",
+				"text-decoration"
+			],
+			[
+				"box",
+				"box-shadow"
+			],
+			[
+				"p",
+				"print"
+			],
+			[
+				"wi",
+				"withLove"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"li",
+				"line-height"
+			],
+			[
+				"sp",
+				"space-between"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"h",
+				"height"
+			],
+			[
+				"list",
+				"list-style"
+			],
+			[
+				"wdi",
+				"width"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"fr",
+				"frame"
+			],
+			[
+				"fro",
+				"from"
+			],
+			[
+				"input",
+				"inputConfirm"
+			],
+			[
+				"inpu",
+				"input2"
+			],
+			[
+				"inp",
+				"input1"
+			],
+			[
+				"c",
+				"components"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"port",
+				"portfolioController"
+			],
+			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"trans",
+				"translate"
+			],
+			[
+				"fon-",
+				"font-size"
+			],
+			[
+				"whi",
+				"white"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 39,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 184.0,
+		"last_filter": "proj",
+		"selected_items":
+		[
+			[
+				"proj",
+				"Project: Save As"
+			],
+			[
+				"close",
+				"Project: Close"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				"proje",
+				"Project: Save As"
+			],
+			[
+				"schem",
+				"Schemr: List all schemes"
+			],
+			[
+				"the",
+				"Themr: List themes"
+			],
+			[
+				"sch",
+				"Schemr: List all schemes"
+			],
+			[
+				"th",
+				"Themr: List themes"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"env",
+				"Snippet: #!/usr/bin/env"
+			],
+			[
+				"snipp en",
+				"Snippet: #!/usr/bin/env"
+			],
+			[
+				"snip",
+				"Snippet: if __name__ == '__main__'"
+			],
+			[
+				"	",
+				":w - Save"
+			],
+			[
+				"snipp",
+				"Snippet: __magic__"
+			],
+			[
+				"them",
+				"Themr: List themes"
+			],
+			[
+				"theme",
+				"Themr: List themes"
+			],
+			[
+				"instl",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"angul	confi",
+				"Snippet: Angular Module config"
+			],
+			[
+				"angul	",
+				"Snippet: Angular module"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"syntax co",
+				"Set Syntax: CoffeeScript"
+			],
+			[
+				"synt sas",
+				"Set Syntax: Sass"
+			]
+		],
+		"width": 382.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/bobou/Documents/GitHub/Arduino-projet-S.A.S"
+	],
+	"file_history":
+	[
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/backend/sas/report.py",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/backend/sas/xbee.py",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/backend/sas/__init__.py",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/frontend/setup.py",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/backend/setup.py",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/README.md",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/setup.sh",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S..wiki/front-end.md",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S..wiki/backend.md",
+		"/C/Users/bobou/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/SASRPI.sublime-project",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/nsetup.py",
+		"/C/Users/bobou/Documents/GitHub/projet-S.A.S-RPI2.0/docs/raspberry.md",
+		"/C/Users/bobou/Documents/GitHub/projet-S.A.S-RPI2.0/docs/arduino.md",
+		"/C/Users/bobou/Documents/GitHub/projet-S.A.S-RPI2.0/launch.bat",
+		"/C/Users/bobou/Documents/GitHub/projet-S.A.S-RPI2.0/launch.sh",
+		"/C/Windows/Resources/Themes/windows.theme",
+		"/C/Users/bobou/Desktop/windows.theme",
+		"/C/Windows/Resources/Themes/color.theme",
+		"/C/Users/bobou/Desktop/colors.theme",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/.travis.yml",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/tests/class.py",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/tests/ia.py",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/pages/projects.html",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/pages/contact.html",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/pages/portfolio.html",
+		"/C/Users/bobou/Documents/GitHub/jquery-konami-plugin/konami_detect.js",
+		"/C/Users/bobou/Documents/GitHub/mathipy/core.py",
+		"/C/Users/bobou/Documents/GitHub/mathipy/mathipy.py",
+		"/C/Users/bobou/Documents/GitHub/mathipy/components.py",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/frame.py",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-projet-S.A.S/core.py",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/assets/sass/stylesheet.sass",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/assets/css/stylesheet.css",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/assets/css/preload.css",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/index.html",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/portfolio.html",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/README.md",
+		"/C/Users/bobou/Downloads/skeleton.css",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/blog/index.html",
+		"/C/Users/bobou/Documents/GitHub/Raspberry-Pi-Xbee-communication/readAndSend.py",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/assets/coffee/test.js",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/assets/sass/preset.sass",
+		"/C/Users/bobou/Documents/GitHub/keikyoku.github.io/assets/js/plugin.js"
+	],
+	"find":
+	{
+		"height": 30.0
+	},
+	"find_in_files":
+	{
+		"height": 158.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"frontend",
+			"bob",
+			"span",
+			"kdb",
+			"small",
+			"les",
+			"Documentation",
+			"ocumentation",
+			"frame",
+			"arg",
+			"Tkinter",
+			"5px"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "README.md",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 39,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								39,
+								39
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 63.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "SASARD.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 307.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
