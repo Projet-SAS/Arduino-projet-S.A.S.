@@ -1,70 +1,109 @@
 #include "Arduino.h"
-
 #include <OneWire.h>
 #include <DallasTemperature.h>
-
 #include <SoftwareSerial.h>
-//Xbee PIN
-#define RXPIN 0
-#define TXPIN 1
-// Xbee Init
+
+int calibrationTime = 10;
+int RXPIN 0
+int TXPIN 1
+int ONE_WIRE_BUS 2
+int ds18b20Pin = 2; // interrupt 0
+int tmpPin[] = { 10 , 11 } // analog in
+int lumPin[] = { 12, 13, 14, 15 } // analog in
+int movementPin[] = { 31, 33, 35 } // digital
+
+//Xbee
 SoftwareSerial XBeeSerial =  SoftwareSerial(RXPIN, TXPIN);
-// Data wire is plugged into port 2 on the Arduino
-#define ONE_WIRE_BUS 2
+
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature sensors(&oneWire);// Pass our oneWire reference to Dallas Temperature. 
+DallasTemperature sensors(&oneWire); // Pass our oneWire reference to Dallas Temperature. 
 
-//the time we give the sensor to calibrate (10-60 secs according to the datasheet)
-int calibrationTime = 10;
-
-//PIN CAPTEURS
-int tmp1Pin = 10; //A10
-int tmp2Pin = 11; //A11
-int photoresPin = 12; //A7
-int PIRPin = 40; //D30
-int ds18b20Pin = 2; //PWM
-  
 void setup(void)
 {
-  Serial.begin(9600);
-  Serial.println("load arduino");
-  // Calibrate sensor for detect movement.
-  Serial.print("calibrating sensor ");
-  for(int i = 0; i < calibrationTime; i++){delay(1000);}
-  Serial.print('\n');
+	Serial.begin(9600);
+	Serial.println("load arduino");
+	XBeeSerial.begin(9600);
 
-  // Envois un message aux modules xbee
-  XBeeSerial.begin(9600);
-  // Start up the library
-  Serial.println("[INFOS] Arduino 1 ok.");
-  sensors.begin();
+	while (! Serial);
+	Serial.println("[INFOS] Arduino 1 ok.");
+
+	//the time we give the sensor to calibrate (10-60 secs according to the datasheet) PIR Sensor
+	Serial.print("calibrating sensor ");
+	for(int i = 0; i < calibrationTime; i++)
+		{
+			Serial.print('.');
+			delay(1000);
+		}
+	Serial.print('\n');
+	sensors.begin();
 }
 
 void loop(void)
 {
-    
-  int movement = is_someone();
-  float exTemp = externalTemperature();
-  float inTempZ1 = internTemperatureZ1();
-  float inTempZ2 = internTemperatureZ2();
-  // 5/1023
-  float tempMoy = (inTempZ1 + inTempZ2)/2;
-  float lumZ1 = whatIsLuxZ1();
-  //float lumZ2 = whatIsLux(2);
 
+	if (XBeeSerial.available() == TRUE )
+	{
+		/* code for getting var */
+	}
 
-   Serial.print("Move:");Serial.print(movement);Serial.print('_');
-   Serial.print("tempExt:");Serial.print(exTemp);Serial.print('_');
-   Serial.print("tempM:");Serial.print(tempMoy);Serial.print('_');
-   Serial.print("lumZ1:");Serial.print(lumZ1);Serial.print('\n');
-  //XBeeSerial.println(lumZ1);
-  /*----------------------------------------------------
-   *                 XBEE COM
-   ---------------------------------------------------*/
+	int movement_zone_1 = is_someone( movementPin[0] );
+	int movement_zone_2 = is_someone( movementPin[0] );
+	int movement_zone_3 = is_someone( movementPin[0] );
+	float ds18_sensor = externalTemperature();
+	float tmp_zone_1 = internTemperature(tmpPin[0]);
+	float tmp_zone_2 = internTemperature(tmpPin[1]);
+	float average_tmp = (tmp_zone_1 + tmp_zone_2)/2;
+	int lum_z_1_s_1 = whatIsLux(lumPin[0]);
+	int lum_z_1_s_2 = whatIsLux(lumPin[1]);
+	int lum_z_2_s_1 = whatIsLux(lumPin[2]);
+	int lum_z_2_s_2 = whatIsLux(lumPin[3]);
 
-    //if (XBeeSerial.available()) {
-      //Serial.println(XBeeSerial.read());
-    //}
+	Serial.print( "movement:");
+	Serial.print( movement_zone_1 ); Serial.print( ',' );
+	Serial.print( movement_zone_2 ); Serial.print( ',' );
+	Serial.print( movement_zone_3 );
+	
+	Serial.print( '\t' );
+	
+	Serial.print( "external_temperature:" );
+	Serial.print( ds18_sensor );
+	
+	Serial.print( '\t' );
+
+	Serial.print( "tmp:" );
+	Serial.print( tmp_zone_1 ); Serial.print( ',' );
+	Serial.print( tmp_zone_2 ); Serial.print( ',' );
+	Serial.print( average_tmp );
+	
+	Serial.print( '\t' );
+	
+	Serial.print( "luminosity:");
+	Serial.print( lum_z_1_s_1 ); Serial.print( ',' );
+	Serial.print( lum_z_1_s_2 ); Serial.print( ',' );
+	Serial.print( lum_z_2_s_1 ); Serial.print( ',' );
+	Serial.print( lum_z_2_s_2 );
+
+	Serial.print( '\n' );
+
+	if ( movement_zone_1 && movement_zone_2 || movement_zone_1 && movement_zone_3 || movement_zone_2 && movement_zone_3 )
+	{
+		Serial.print( "i'm pretty sure there is someone" );
+	}
+
+	float lum_z_1 = ( lum_z_1_s_1 + lum_z_1_s_2 )/2;
+	float lum_z_2 = ( lum_z_2_s_1 + lum_z_2_s_2 )/2;
+	
+	if ( lum_z_1 < 500 )
+	{
+		Serial.print( "lights in zone 1 should be lighter" );
+	}
+
+	if ( lum_z_2 < 500 )
+	{
+		Serial.print( "lights in zone 2 should be lighter" );
+	}
+
+	delay(3000);
 }
 

@@ -2,8 +2,9 @@
  *                 PIR MOVEMENT SENSOR              *
  ---------------------------------------------------*/
 
-int is_someone() {
-  int presence = digitalRead(PIRPin);
+int is_someone (sensorsPin)
+{
+  int presence = digitalRead(sensorsPin);
   return presence;
 }
 
@@ -11,7 +12,8 @@ int is_someone() {
  *                 D18B20 SENSOR                    *
  ---------------------------------------------------*/
 
-float externalTemperature() {
+float externalTemperature ()
+{
   sensors.requestTemperatures();
   return sensors.getTempCByIndex(0);
 }
@@ -20,26 +22,22 @@ float externalTemperature() {
  *                 TMP36 SENSOR                    *
  ---------------------------------------------------*/
 
-float internTemperatureZ1 () {
-  int inTmp36 = analogRead(tmp1Pin);
+float internTemperature (sensorsPin)
+{
+  int tmp36 = analogRead(sensorsPin);
   //5/1023
-  float temperatureC = ((inTmp36*0.004882) - 0.50) * 100;
-  return temperatureC;
+  float temperature = ((tmp36*0.004882) - 0.50) * 100;
+  return temperature;
 }
 
-float internTemperatureZ2 () {
-  int inTmp36 = analogRead(tmp2Pin);
-  //5/1023
-  float temperatureC = ((inTmp36*0.004882) - 0.50) * 100;
-  return temperatureC;
-}
 /*----------------------------------------------------
- *                 PHOTOCELL SENSOR                    *
+ *                 PHOTOCELL SENSOR                  *
  ---------------------------------------------------*/
 
-int whatIsLuxZ1 () {
+int whatIsLux (sensorsIn)
+{
   int photocellReading;
-  photocellReading = analogRead(photoresPin);
+  photocellReading = analogRead(sensorsIn);
   return photocellReading;
 }
 
