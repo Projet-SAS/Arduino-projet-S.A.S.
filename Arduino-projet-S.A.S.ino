@@ -23,6 +23,7 @@ void setup(void)
 {
 	Serial.begin(9600);
 	Serial.println("load arduino");
+	Serial.println("temperature(3)\tphotocell(4)\tmouvement(3)");
 	XBeeSerial.begin(9600);
 
 	while (! Serial);
@@ -42,10 +43,6 @@ void setup(void)
 void loop(void)
 {
 
-	if (XBeeSerial.available() == TRUE )
-	{
-		/* code for getting var */
-	}
 
 	int movement_zone_1 = is_someone( movementPin[0] );
 	int movement_zone_2 = is_someone( movementPin[0] );
@@ -59,49 +56,42 @@ void loop(void)
 	int lum_z_2_s_1 = whatIsLux(lumPin[2]);
 	int lum_z_2_s_2 = whatIsLux(lumPin[3]);
 
-	Serial.print( "movement:");
-	Serial.print( movement_zone_1 ); Serial.print( ',' );
-	Serial.print( movement_zone_2 ); Serial.print( ',' );
-	Serial.print( movement_zone_3 );
-	
-	Serial.print( '\t' );
-	
-	Serial.print( "external_temperature:" );
-	Serial.print( ds18_sensor );
-	
-	Serial.print( '\t' );
 
-	Serial.print( "tmp:" );
-	Serial.print( tmp_zone_1 ); Serial.print( ',' );
-	Serial.print( tmp_zone_2 ); Serial.print( ',' );
-	Serial.print( average_tmp );
+	Serial.print( tmp_zone_1 ); Serial.print( '\t' );
+	Serial.print( tmp_zone_2 ); Serial.print( '\t' );
+	Serial.print( ds18_sensor );Serial.print( '\t' );
 	
-	Serial.print( '\t' );
+	Serial.print( lum_z_1_s_1 ); Serial.print( '\t' );
+	Serial.print( lum_z_1_s_2 ); Serial.print( '\t' );
+	Serial.print( lum_z_2_s_1 ); Serial.print( '\t' );
+	Serial.print( lum_z_2_s_2 ); Serial.print( '\t' );
 	
-	Serial.print( "luminosity:");
-	Serial.print( lum_z_1_s_1 ); Serial.print( ',' );
-	Serial.print( lum_z_1_s_2 ); Serial.print( ',' );
-	Serial.print( lum_z_2_s_1 ); Serial.print( ',' );
-	Serial.print( lum_z_2_s_2 );
+	Serial.print( movement_zone_1 ); Serial.print( '\t' );
+	Serial.print( movement_zone_2 ); Serial.print( '\t' );
+	Serial.print( movement_zone_3 ); Serial.print( '\n' );
 
-	Serial.print( '\n' );
+//	if ( movement_zone_1 && movement_zone_2 || movement_zone_1 && movement_zone_3 || movement_zone_2 && movement_zone_3 )
+//	{
+//		Serial.print( "i'm pretty sure there is someone" );
+//	}
+//
+//	float lum_z_1 = ( lum_z_1_s_1 + lum_z_1_s_2 )/2;
+//	float lum_z_2 = ( lum_z_2_s_1 + lum_z_2_s_2 )/2;
+//	
+//	if ( lum_z_1 < 500 )
+//	{
+//		Serial.print( "lights in zone 1 should be lighter" );
+//	}
+//
+//	if ( lum_z_2 < 500 )
+//	{
+//		Serial.print( "lights in zone 2 should be lighter" );
+//	}
 
-	if ( movement_zone_1 && movement_zone_2 || movement_zone_1 && movement_zone_3 || movement_zone_2 && movement_zone_3 )
+	if (XBeeSerial.available() == TRUE )
 	{
-		Serial.print( "i'm pretty sure there is someone" );
-	}
-
-	float lum_z_1 = ( lum_z_1_s_1 + lum_z_1_s_2 )/2;
-	float lum_z_2 = ( lum_z_2_s_1 + lum_z_2_s_2 )/2;
-	
-	if ( lum_z_1 < 500 )
-	{
-		Serial.print( "lights in zone 1 should be lighter" );
-	}
-
-	if ( lum_z_2 < 500 )
-	{
-		Serial.print( "lights in zone 2 should be lighter" );
+		/* code for getting var */
+		// analogwrite ?
 	}
 
 	delay(3000);
