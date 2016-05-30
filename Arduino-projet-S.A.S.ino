@@ -1,19 +1,17 @@
-#include "Arduino.h"
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <SoftwareSerial.h>
 
 int calibrationTime = 10;
-int RXPIN 0
-int TXPIN 1
-int ONE_WIRE_BUS 2
+int ONE_WIRE_BUS = 2;
 int ds18b20Pin = 2; // interrupt 0
-int tmpPin[] = { 10 , 11 } // analog in
-int lumPin[] = { 12, 13, 14, 15 } // analog in
-int movementPin[] = { 31, 33, 35 } // digital
-
-//Xbee
-SoftwareSerial XBeeSerial =  SoftwareSerial(RXPIN, TXPIN);
+int tmpPin[] = { 8 , 9 }; // analog in
+int lumPin[] = { 12, 13, 14, 15 }; // analog in
+int movementPin[] = { 31, 33, 35 }; // digital
+int lightning;
+int heating;
+int stagePin;
+int ballastPin;
 
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 OneWire oneWire(ONE_WIRE_BUS);
@@ -23,8 +21,6 @@ void setup(void)
 {
 	Serial.begin(9600);
 	Serial.println("load arduino");
-	Serial.println("temperature(3)\tphotocell(4)\tmouvement(3)");
-	XBeeSerial.begin(9600);
 
 	while (! Serial);
 	Serial.println("[INFOS] Arduino 1 ok.");
@@ -38,62 +34,86 @@ void setup(void)
 		}
 	Serial.print('\n');
 	sensors.begin();
+  Serial.println("temperature(3)\tphotocell(4)\tmouvement(3)");
+
 }
 
 void loop(void)
 {
-
-
-	int movement_zone_1 = is_someone( movementPin[0] );
-	int movement_zone_2 = is_someone( movementPin[0] );
-	int movement_zone_3 = is_someone( movementPin[0] );
-	float ds18_sensor = externalTemperature();
-	float tmp_zone_1 = internTemperature(tmpPin[0]);
-	float tmp_zone_2 = internTemperature(tmpPin[1]);
+	int movement_zone_1 = digitalRead(movementPin[0]);
+	int movement_zone_2 = digitalRead(movementPin[0]);
+	int movement_zone_3 = digitalRead(movementPin[0]);
+  sensors.requestTemperatures();
+	float ds18_sensor = sensors.getTempCByIndex(0); 
+	float tmp_zone_1 = (((analogRead(tmpPin[0]))*0.004882) - 0.50) * 100;
+	float tmp_zone_2 = (((analogRead(tmpPin[1]))*0.004882) - 0.50) * 100;
 	float average_tmp = (tmp_zone_1 + tmp_zone_2)/2;
-	int lum_z_1_s_1 = whatIsLux(lumPin[0]);
-	int lum_z_1_s_2 = whatIsLux(lumPin[1]);
-	int lum_z_2_s_1 = whatIsLux(lumPin[2]);
-	int lum_z_2_s_2 = whatIsLux(lumPin[3]);
+	int lum_z_1_s_1 = analogRead(lumPin[0]);
+	int lum_z_1_s_2 = analogRead(lumPin[1]);
+	int lum_z_2_s_1 = analogRead(lumPin[2]);
+	int lum_z_2_s_2 = analogRead(lumPin[3]);
 
-
-	Serial.print( tmp_zone_1 ); Serial.print( '\t' );
-	Serial.print( tmp_zone_2 ); Serial.print( '\t' );
-	Serial.print( ds18_sensor );Serial.print( '\t' );
-	
-	Serial.print( lum_z_1_s_1 ); Serial.print( '\t' );
-	Serial.print( lum_z_1_s_2 ); Serial.print( '\t' );
-	Serial.print( lum_z_2_s_1 ); Serial.print( '\t' );
-	Serial.print( lum_z_2_s_2 ); Serial.print( '\t' );
-	
-	Serial.print( movement_zone_1 ); Serial.print( '\t' );
-	Serial.print( movement_zone_2 ); Serial.print( '\t' );
-	Serial.print( movement_zone_3 ); Serial.print( '\n' );
-
-//	if ( movement_zone_1 && movement_zone_2 || movement_zone_1 && movement_zone_3 || movement_zone_2 && movement_zone_3 )
-//	{
-//		Serial.print( "i'm pretty sure there is someone" );
-//	}
-//
-//	float lum_z_1 = ( lum_z_1_s_1 + lum_z_1_s_2 )/2;
-//	float lum_z_2 = ( lum_z_2_s_1 + lum_z_2_s_2 )/2;
-//	
-//	if ( lum_z_1 < 500 )
-//	{
-//		Serial.print( "lights in zone 1 should be lighter" );
-//	}
-//
-//	if ( lum_z_2 < 500 )
-//	{
-//		Serial.print( "lights in zone 2 should be lighter" );
-//	}
-
-	if (XBeeSerial.available() == TRUE )
+	if (Serial.available())
 	{
-		/* code for getting var */
+    Serial.print(Serial.read());
+    String data = (String) Serial.readString();
+		if( data == "readData") {
+		  Serial.print("movement:");
+      Serial.print(movement_zone_1);
+      Serial.print('_');
+      Serial.print(movement_zone_2);
+      Serial.print('_');
+      Serial.print(movement_zone_3);
+      Serial.print('\t');
+      
+      Serial.print("external temperature:");
+      //Serial.print(ds18_sensor);
+      Serial.print("none");
+      Serial.print('\t');
+      
+      Serial.print("temperature of the room:");
+      Serial.print(tmp_zone_1);
+      Serial.print('_');
+      Serial.print(tmp_zone_2);
+      Serial.print('\t');
+
+      Serial.print("luminosity zone 1:");
+      Serial.print(lum_z_1_s_1);
+      Serial.print('_');
+      Serial.print(lum_z_1_s_2);
+      Serial.print('\t');
+
+      Serial.print("luminosity zone 2:");
+      Serial.print(lum_z_2_s_1);
+      Serial.print('_');
+      Serial.println(lum_z_2_s_2);
+		} else if(data == "lightup") {
+        lightning = lightning + 1;
+	  } else if(data == "lightdown") {
+        lightning = lightning - 1;
+	  } else if(data == "heatup") {
+        heating = heating + 1;
+	  } else if(data == "heatdown") {
+        heating = heating - 1;
+	  } else {
+      Serial.println("order unknow");
+	  }
+   
 		// analogwrite ?
 	}
 
-	delay(3000);
+ if(lightning > 0) {
+  analogWrite(ballastPin, 1);
+ } else {
+  analogWrite(ballastPin, 0);
+  Serial.println("light is off");
+ }
+
+ if(heating > 0) {
+  analogWrite(stagePin, 1);
+ } else {
+  analogWrite(stagePin, 0);
+  Serial.println("heat is off");
+ }
 }
 
